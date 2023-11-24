@@ -42,8 +42,9 @@ class PostController extends Controller
      *          @OA\JsonContent(
      *              @OA\Property(property="data", type="array", @OA\Items(
      *                    @OA\Property(property="id", type="integer", example=1),
-     *                    @OA\Property(property="title", type="string", example="Some Title"),
-     *                    @OA\Property(property="likes", type="string", example=321),
+     *                    @OA\Property(property="name", type="string", example="Some Title"),
+     *                    @OA\Property(property="description", type="string", example="Some Description"),
+     *                    @OA\Property(property="image", type="string", example="base64example"),
      *              )),
      *          ),
      *     ),
@@ -55,65 +56,6 @@ class PostController extends Controller
         return PostResource::collection($posts);
     }
 
-    /**
-     * @OA\Post(
-     *     path="/api/posts/multi",
-     *     summary="Store a newly created post resource in storage",
-     *     tags={"Post"},
-     *     security={{"bearerAuth":{}}},
-     *     @OA\RequestBody(
-     *          @OA\JsonContent(
-     *               allOf={
-     *                    @OA\Schema(
-     *                         @OA\Property(property="title", type="string"),
-     *                         @OA\Property(property="likes", type="integer"),
-     *                    ),
-     *               },
-     *              example={
-     *              {
-     *                  "title": "Some Title",
-     *                  "likes": 321
-     *              },
-     *              {
-     *                  "title": "Other Title",
-     *                  "likes": 2222
-     *              }
-     *              }
-     *          ),
-     *     ),
-     *
-     *     @OA\Response(
-     *          response=200,
-     *          description="OK",
-     *          @OA\JsonContent(
-     *               @OA\Property(property="data", type="object",
-     *                    @OA\Property(property="first_item", type="object",
-     *                        @OA\Property(property=1, type="array", @OA\Items(
-     *                              @OA\Property(property="id", type="integer", example=1),
-     *                              @OA\Property(property="title", type="string", example="Some Title"),
-     *                              @OA\Property(property="likes", type="string", example=321),
-     *                        )),
-     *                        @OA\Property(property=2, type="array", @OA\Items(
-     *                              @OA\Property(property="id", type="integer", example=1),
-     *                              @OA\Property(property="title", type="string", example="Some Title"),
-     *                              @OA\Property(property="likes", type="string", example=321),
-     *                        )),
-     *                    ),
-     *                    @OA\Property(property="second_item", type="object"),
-     *               ),
-     *              example={
-     *                  "data": {
-     *                      "first_item": {
-     *                          1: {},
-     *                          2: {},
-     *                      },
-     *                      "second_item": {},
-     *                  }
-     *              },
-     *          ),
-     *     ),
-     * ),
-     */
     public function create()
     {
         //
@@ -129,8 +71,9 @@ class PostController extends Controller
      *          @OA\JsonContent(
      *               allOf={
      *                    @OA\Schema(
-     *                         @OA\Property(property="title", type="string", example="Some Title"),
-     *                         @OA\Property(property="likes", type="integer", example=321),
+     *                         @OA\Property(property="name", type="string", example="Some Title"),
+     *                         @OA\Property(property="description", type="string", example="Some Title"),
+     *                         @OA\Property(property="image", type="string", example=321),
      *                    ),
      *               },
      *          ),
