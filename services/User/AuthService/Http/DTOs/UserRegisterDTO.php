@@ -7,6 +7,7 @@ namespace Services\User\AuthService\Http\DTOs;
 class UserRegisterDTO extends BaseDTO
 {
     public readonly string $name;
+    public readonly string $last_name;
     public readonly string $email;
     public readonly string $password;
 

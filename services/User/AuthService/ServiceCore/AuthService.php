@@ -3,12 +3,21 @@ declare(strict_types=1);
 
 namespace Services\User\AuthService\ServiceCore;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Config;
 use Services\User\AuthService\Contracts\AuthServiceInterface;
 use Services\User\AuthService\Http\DTOs\UserAuthDTO;
+use Services\User\AuthService\Repositories\UserRepository;
 
 class AuthService implements AuthServiceInterface
 {
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function login(UserAuthDTO $userAuthDto)
     {
         if(!$token = auth('api')->attempt($userAuthDto->toArray())){
@@ -37,5 +46,11 @@ class AuthService implements AuthServiceInterface
             'type' => 'bearer',
             'expires_in' => Config::get('jwt.ttl') * 6000
         ], 401);
+    }
+
+    public function register($requestDto) :  User
+    {
+        $newUser = $this->userRepository->create(['name' => $requestDto->name, 'last_name' => $requestDto->last_name, 'email' => $requestDto->email, 'password' => $requestDto->password]);
+        return $newUser;
     }
 }
