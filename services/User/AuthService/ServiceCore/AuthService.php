@@ -5,8 +5,9 @@ namespace Services\User\AuthService\ServiceCore;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Password;
 use Services\User\AuthService\Contracts\AuthServiceInterface;
-use Services\User\AuthService\Http\DTOs\UserAuthDTO;
+use Services\User\AuthService\Http\DTOs\User\UserAuthDTO;
 use Services\User\AuthService\Repositories\UserRepository;
 
 class AuthService implements AuthServiceInterface
@@ -20,6 +21,7 @@ class AuthService implements AuthServiceInterface
 
     public function login(UserAuthDTO $userAuthDto)
     {
+        $status = Password::sendResetLink(['email' => $userAuthDto->email]);
         if(!$token = auth('api')->attempt($userAuthDto->toArray())){
             return response()->json(['error' => 'Unauthorized'], 401);
         }

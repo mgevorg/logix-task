@@ -3,6 +3,7 @@
 namespace Services\User\AuthService\Repositories;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository
 {
@@ -38,6 +39,11 @@ class UserRepository
         }
 
         return null;
+    }
+
+    public function updateByEmail($email, $password)
+    {
+        $this->model->where('email', $email)->update(['password' => Hash::make($password)]);
     }
 
     public function delete($id)

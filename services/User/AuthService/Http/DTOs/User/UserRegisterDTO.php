@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Services\User\AuthService\Http\DTOs;
+namespace Services\User\AuthService\Http\DTOs\User;
 
+
+use Services\User\AuthService\Http\DTOs\BaseDTO;
 
 class UserRegisterDTO extends BaseDTO
 {

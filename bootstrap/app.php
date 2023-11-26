@@ -50,12 +50,21 @@ $app->bind(
     Services\User\AuthService\Contracts\AuthServiceInterface::class
 );
 $app->bind(
-    Services\User\PostService\Contracts\AuthServiceInterface::class,
+    Services\User\PostService\Contracts\PostServiceInterface::class,
     Services\User\PostService\ServiceCore\PostService::class,
 );
 $app->bind(
     'services.user.post-service',
     Services\User\AuthService\Contracts\AuthServiceInterface::class
+);
+
+$app->bind(
+    Services\User\AuthService\Contracts\PasswordServiceInterface::class,
+    Services\User\AuthService\ServiceCore\PasswordService::class,
+);
+$app->bind(
+    'services.user.password-service',
+    Services\User\AuthService\Contracts\PasswordServiceInterface::class,
 );
 
 

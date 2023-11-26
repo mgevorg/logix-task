@@ -2,7 +2,7 @@
 
 namespace Services\User\AuthService\Contracts;
 
-use Services\User\AuthService\Http\DTOs\UserAuthDTO;
+use Services\User\AuthService\Http\DTOs\User\UserAuthDTO;
 
 interface AuthServiceInterface
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace Services\User\AuthService\Http\Requests;
+namespace Services\User\AuthService\Http\Requests\Password;
 
 use App\Http\Requests\BaseRequest;
+use App\Models\User;
 use Illuminate\Validation\Rules\Password;
 
-class UserRegisterRequest extends BaseRequest
+class ResetPasswordRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-
     public function authorize(): bool
     {
         return true;
@@ -24,9 +24,7 @@ class UserRegisterRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email:rfc,dns|unique:users,email|max:255',
-            'name' => 'required',
-            'last_name' => 'required',
+            'email' => 'required|email|exists:users',
             'password' => [
                 'required',
                 Password::min(8)
@@ -36,13 +34,9 @@ class UserRegisterRequest extends BaseRequest
                     ->symbols()
                     ->uncompromised()
             ],
-            'password_confirmation' => 'required|same:password'
+            'password_confirmation' => 'required|same:password',
+            'token' => 'required'
         ];
     }
-    public function messages()
-    {
-        return parent::messages();
-    }
-
 }
 

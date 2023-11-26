@@ -1,11 +1,11 @@
 <?php
 
-namespace Services\User\AuthService\Http\Requests;
+namespace Services\User\AuthService\Http\Requests\Password;
 
 use App\Http\Requests\BaseRequest;
 use App\Models\User;
 
-class UserAuthRequest extends BaseRequest
+class ForgetPasswordRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,7 @@ class UserAuthRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'email' => 'required:users|email',
-            'password' => 'required'
+            'email' => 'required|email|exists:users',
         ];
     }
 }

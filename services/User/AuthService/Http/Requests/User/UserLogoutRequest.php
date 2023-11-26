@@ -1,9 +1,8 @@
 <?php
 
-namespace Services\User\AuthService\Http\Requests;
+namespace Services\User\AuthService\Http\Requests\User;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 
 class UserLogoutRequest extends Request
 {

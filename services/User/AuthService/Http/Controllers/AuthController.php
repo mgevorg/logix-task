@@ -3,11 +3,10 @@
 namespace Services\User\AuthService\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Services\User\AuthService\Contracts\AuthServiceInterface;
-use Services\User\AuthService\Http\DTOs\UserRegisterDTO;
-use Services\User\AuthService\Http\Requests\UserAuthRequest;
-use Services\User\AuthService\Http\DTOs\UserAuthDTO;
-use Services\User\AuthService\Http\Requests\UserRegisterRequest;
+use Services\User\AuthService\Http\DTOs\User\UserAuthDTO;
+use Services\User\AuthService\Http\DTOs\User\UserRegisterDTO;
+use Services\User\AuthService\Http\Requests\User\UserAuthRequest;
+use Services\User\AuthService\Http\Requests\User\UserRegisterRequest;
 
 class AuthController extends Controller
 {
