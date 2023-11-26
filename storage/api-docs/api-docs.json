@@ -64,6 +64,196 @@
                 }
             }
         },
+        "/api/auth/register/": {
+            "post": {
+                "tags": [
+                    "Authorization"
+                ],
+                "summary": "User register.",
+                "operationId": "b45e25ca2c3542ea81acc8d87ca9680d",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Name"
+                                            },
+                                            "last_name": {
+                                                "type": "string",
+                                                "example": "LastName"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "user@gmail.com"
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "example": "password123$"
+                                            },
+                                            "password_confirmation": {
+                                                "type": "string",
+                                                "example": "password123$"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjk5OTY1OTc5LCJleHAiOjE2OTk5Njk1NzksIm5iZiI6MTY5OTk2NTk3OSwianRpIjoiMWpVeVpGVWYzdlpZRnJDcyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.dlAUe2hCZSviHBlkUlTw_R8YGyhUUZx-cSyyfNey2Mc"
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "example": "Bearer"
+                                        },
+                                        "expires_in": {
+                                            "type": "integer",
+                                            "example": 3600
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/forget-password/": {
+            "post": {
+                "tags": [
+                    "ForgetPassword"
+                ],
+                "summary": "Forget password.",
+                "operationId": "2a81e6c261b1cd9099a9dae322ea0e25",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "email": {
+                                                "type": "string",
+                                                "example": "user@user.user"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "Password Reset Token Sent"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/reset-password/": {
+            "post": {
+                "tags": [
+                    "ForgetPassword"
+                ],
+                "summary": "Submit new password.",
+                "operationId": "fca6c58ab82b8b46fdbf0b2cb4d7b956",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "email": {
+                                                "type": "string",
+                                                "example": "user@user.user"
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "example": "password11$$"
+                                            },
+                                            "password_confirmation": {
+                                                "type": "string",
+                                                "example": "password11$$"
+                                            },
+                                            "token": {
+                                                "type": "string",
+                                                "example": "example_token"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "Password Reset Token Sent"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Message": {
+                                            "type": "string",
+                                            "example": "Fail"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/posts/": {
             "get": {
                 "tags": [
@@ -87,13 +277,17 @@
                                                         "type": "integer",
                                                         "example": 1
                                                     },
-                                                    "title": {
+                                                    "name": {
                                                         "type": "string",
                                                         "example": "Some Title"
                                                     },
-                                                    "likes": {
+                                                    "description": {
                                                         "type": "string",
-                                                        "example": 321
+                                                        "example": "Some Description"
+                                                    },
+                                                    "image": {
+                                                        "type": "string",
+                                                        "example": "base64example"
                                                     }
                                                 },
                                                 "type": "object"
@@ -101,127 +295,6 @@
                                         }
                                     },
                                     "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/api/posts/multi": {
-            "post": {
-                "tags": [
-                    "Post"
-                ],
-                "summary": "Store a newly created post resource in storage",
-                "operationId": "715eeccdd5d5a58c21dd61891223e903",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "allOf": [
-                                    {
-                                        "properties": {
-                                            "title": {
-                                                "type": "string"
-                                            },
-                                            "likes": {
-                                                "type": "integer"
-                                            }
-                                        },
-                                        "type": "object"
-                                    }
-                                ]
-                            },
-                            "example": [
-                                {
-                                    "title": "Some Title",
-                                    "likes": 321
-                                },
-                                {
-                                    "title": "Other Title",
-                                    "likes": 2222
-                                }
-                            ]
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "properties": {
-                                                "first_item": {
-                                                    "properties": {
-                                                        "1": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "properties": {
-                                                                    "id": {
-                                                                        "type": "integer",
-                                                                        "example": 1
-                                                                    },
-                                                                    "title": {
-                                                                        "type": "string",
-                                                                        "example": "Some Title"
-                                                                    },
-                                                                    "likes": {
-                                                                        "type": "string",
-                                                                        "example": 321
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            }
-                                                        },
-                                                        "2": {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "properties": {
-                                                                    "id": {
-                                                                        "type": "integer",
-                                                                        "example": 1
-                                                                    },
-                                                                    "title": {
-                                                                        "type": "string",
-                                                                        "example": "Some Title"
-                                                                    },
-                                                                    "likes": {
-                                                                        "type": "string",
-                                                                        "example": 321
-                                                                    }
-                                                                },
-                                                                "type": "object"
-                                                            }
-                                                        }
-                                                    },
-                                                    "type": "object"
-                                                },
-                                                "second_item": {
-                                                    "type": "object"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "example": {
-                                    "data": {
-                                        "first_item": {
-                                            "1": [],
-                                            "2": []
-                                        },
-                                        "second_item": []
-                                    }
                                 }
                             }
                         }
@@ -248,12 +321,16 @@
                                 "allOf": [
                                     {
                                         "properties": {
-                                            "title": {
+                                            "name": {
                                                 "type": "string",
                                                 "example": "Some Title"
                                             },
-                                            "likes": {
-                                                "type": "integer",
+                                            "description": {
+                                                "type": "string",
+                                                "example": "Some Title"
+                                            },
+                                            "image": {
+                                                "type": "string",
                                                 "example": 321
                                             }
                                         },

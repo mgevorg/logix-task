@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Services\User\PostService\Http\Requests\StoreRequest;
 use Services\User\PostService\Http\Requests\UpdateRequest;
+use Services\User\PostService\Http\Resources\PostCollection;
 use Services\User\PostService\Http\Resources\PostResource;
 use App\Models\Post;
 use OpenApi\Annotations as OA;
@@ -28,6 +29,11 @@ use OpenApi\Annotations as OA;
  */
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("jwt.auth")->except('store');
+    }
+
     /**
      * @OA\Get(
      *     path="/api/posts/",
@@ -52,7 +58,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(10);
         return PostResource::collection($posts);
     }
 

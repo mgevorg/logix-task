@@ -55,7 +55,7 @@ class PasswordService implements PasswordServiceInterface
         if(!$updatePassword){
             return response()->json(array('message' => 'Invalid token!'));
         }
-        $this->userRepository->updateByEmail($request->email, $request->password);
+        $this->userRepository->updatePasswordByEmail($request->email, $request->password);
         $removeToken = $this->passwordResetTokenRepository->removeToken($request->email);
 
         return response()->json(array('message' => 'Your password has been changed!'));

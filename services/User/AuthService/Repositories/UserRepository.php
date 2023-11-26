@@ -41,7 +41,7 @@ class UserRepository
         return null;
     }
 
-    public function updateByEmail($email, $password)
+    public function updatePasswordByEmail($email, $password)
     {
         $this->model->where('email', $email)->update(['password' => Hash::make($password)]);
     }
